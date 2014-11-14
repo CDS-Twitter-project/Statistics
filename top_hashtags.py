@@ -25,7 +25,7 @@ def main():
     sorted_freq = sorted(freq.iteritems(), key=operator.itemgetter(1))
 
     i = len(sorted_freq)-1
-    while (i >= len(sorted_freq)-50):
+    while (i >= len(sorted_freq)-50 and i < len(sorted_freq) and i >= 0):
         u, v = sorted_freq[i]
         i = i - 1
         print u, v

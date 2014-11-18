@@ -17,7 +17,7 @@ input_file = open(sys.argv[1])
 for line in input_file:
 	record = json.loads(line)
 	tweet = record[1]
-	allTweets.append(tweet)
+	allTweets.append(tweet.encode('utf-8', errors='ignore'))
 
 
 vectorizer = CountVectorizer(min_df=0, stop_words='english')

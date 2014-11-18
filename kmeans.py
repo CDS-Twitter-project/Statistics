@@ -27,5 +27,6 @@ X = X.toarray()
 kmeans = KMeans(n_clusters=5)
 clusters = kmeans.fit_predict(X)
 
-print clusters
+for x,index in zip(allTweets,clusters):
+	print x,index
 

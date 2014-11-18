@@ -27,6 +27,10 @@ X = X.toarray()
 kmeans = KMeans(n_clusters=5)
 clusters = kmeans.fit_predict(X)
 
+clusteredTweets = {i:[] for i in range(5)}
 for x,index in zip(allTweets,clusters):
-	print x,index
+	if (index in clusteredTweets.keys()):
+		clusteredTweets[i].append(x)
+		
+print clusteredTweets
 

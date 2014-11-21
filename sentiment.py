@@ -25,9 +25,24 @@ def sentiment(line):
 
 ##	Open the input tweet file. 
 ## Each line is of the form [user_id, tweet_text, fav_count, retweets, index, date, hashtags]
+#input_file = open(sys.argv[2])
+#for line in input_file:
+#	record = json.loads(line)
+#	tweet_text = record[1]
+#	sentiment_score = sentiment(tweet_text)
+#	print sentiment_score
+	
+	
 input_file = open(sys.argv[2])
 for line in input_file:
-	record = json.loads(line)
-	tweet_text = record[1]
-	sentiment_score = sentiment(tweet_text)
-	print sentiment_score
+	mainDict = json.loads(line)
+	for date in mainDict.keys():
+		print date
+		records = mainDict[date]['records']
+		numberOfTweets = mainDict[date]['count']
+		totalSentiment = 0.0
+		for x in records:
+			tweetText = x[1]
+			score = sentiment(tweetText)
+			totalSentiment += score
+		print totalSentiment		

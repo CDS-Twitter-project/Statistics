@@ -1,3 +1,4 @@
+import csv
 import json
 import sys
 import re
@@ -34,14 +35,23 @@ def sentiment(line):
 	
 	
 input_file = open(sys.argv[2])
-for line in input_file:
-	mainDict = json.loads(line)
-	for date in mainDict.keys():
-		records = mainDict[date]['records']
-		numberOfTweets = mainDict[date]['count']
-		totalSentiment = 0.0
-		for x in records:
-			tweetText = x[1]
-			score = sentiment(tweetText)
-			totalSentiment += score
-		print "%s, %f" % (date, (totalSentiment / numberOfTweets))
+with open("sentiment_by_tweet.csv", 'wb') as csvfile:
+	writer = csv.writer(csvfile)
+	i = 0
+	for line in input_file:
+		sentiment_score = sentiment(line)
+		writer.writerow([i, sentiment_score])
+		i += 1
+	
+
+#for line in input_file:
+#	mainDict = json.loads(line)
+#	for date in mainDict.keys():
+#		records = mainDict[date]['records']
+#		numberOfTweets = mainDict[date]['count']
+#		totalSentiment = 0.0
+#		for x in records:
+#			tweetText = x[1]
+#			score = sentiment(tweetText)
+#			totalSentiment += score
+#		print "%s, %f" % (date, (totalSentiment / numberOfTweets))

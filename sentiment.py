@@ -37,7 +37,6 @@ input_file = open(sys.argv[2])
 for line in input_file:
 	mainDict = json.loads(line)
 	for date in mainDict.keys():
-		print date
 		records = mainDict[date]['records']
 		numberOfTweets = mainDict[date]['count']
 		totalSentiment = 0.0
@@ -45,4 +44,4 @@ for line in input_file:
 			tweetText = x[1]
 			score = sentiment(tweetText)
 			totalSentiment += score
-		print totalSentiment		
+		print "%s, %f" % (date, (totalSentiment / numberOfTweets))

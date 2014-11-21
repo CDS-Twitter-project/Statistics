@@ -13,16 +13,17 @@ import urllib2
 def main():
     data_file = open(sys.argv[1])
     dataByDate = {}
+    tweets = []
     for line in data_file:
         record = json.loads(line)
         date = record[5]
-        if (date in dataByDate.keys()):
-            if (record[4] not in dataByDate[date]['recordIDs']):
+        if (record[1] not in tweets):
+            tweets.append(record[1])
+            if (date in dataByDate.keys()):
                 dataByDate[date]['records'].append(record)
-                dataByDate[date]['recordIDs'].append(record[4])
                 dataByDate[date]['count'] += 1
-        else:
-            dataByDate[date] = { 'records': [record], 'count': 1, 'recordIDs': [record[4]]}
+            else:
+                dataByDate[date] = { 'records': [record], 'count': 1}
     return dataByDate
     
 if __name__== '__main__':
